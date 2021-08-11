@@ -4,8 +4,21 @@ pipeline {
         choice(
             choices: ['AUS' , 'EU', 'USA'],
             description: '',
-            name: 'Choose Environment')
+            name: 'ENVIRONMENT')
     }
+     stage('Deploy to AUS') {
+            when {
+                expression { 
+                   return params.ENVIRONMENT == 'AUS'
+                }
+            }
+            steps {
+                    sh """
+                    echo "deploy to AUS"
+                    """
+                }
+            }
+   }
    
      tools {nodejs "Node16"}
   
