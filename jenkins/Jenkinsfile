@@ -13,7 +13,7 @@ pipeline {
         stage("Build") {
              
             steps {
-                 input "Start the Build environment to ${params.ENVIRONMENT}?"
+                 input "Start the Build for ${params.ENVIRONMENT} Server S?"
 
                 sh "npm install"
                 sh "npm run build"
