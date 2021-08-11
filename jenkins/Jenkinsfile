@@ -11,17 +11,13 @@ pipeline {
   
      stages {
         stage("Build") {
-             when {
-                expression { 
-                     return params.ENVIRONMENT == '${params.ENVIRONMENT}'
-                }
-            }
-
+             
             steps {
+                 input "Start the Build environment to ${params.choice}?"
 
                 sh "npm install"
                 sh "npm run build"
-                 echo "Building to ${params.ENVIRONMENT}"
+                 echo "Building to ${params.choice}"
             }
         }
         stage("Deploy") {
