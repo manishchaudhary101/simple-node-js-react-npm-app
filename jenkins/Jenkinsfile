@@ -11,12 +11,7 @@ pipeline {
   
      stages {
         stage("Build") {
-             input {
-  message 'Choose the Environment'
-}
-     when {
-       environment name: 'ENVIRONMENT', value: 'AUS'
-     }
+
             steps {
 
                 sh "npm install"
