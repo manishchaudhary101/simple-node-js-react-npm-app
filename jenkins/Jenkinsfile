@@ -26,34 +26,7 @@ pipeline {
         }
         stage("Deploy") {
              steps{ echo "deploying"
-
-                sshPublisher(publishers: [sshPublisherDesc(configName: 'EC2-1', sshCredentials: [encryptedPassphrase: '{AQAAABAAAABQSNC/km+Wuptmh+hxOw42l4s1UBfowAM6oyXbEG7LuIL0bLyB/jlhtXXYI8S8I/UUol9QwxlEbTAlYIpt4sVgf+Ym1iT3cDeGQ17ENwtgu936GuLNUlzqo88LByEbzrfs}', key: '''-----BEGIN RSA PRIVATE KEY-----
-MIIEpAIBAAKCAQEAx2YWR0as7DeQJA3P8heCEDYkyfA0qUJylF/56WDMBUB5JWiV
-W9mQGBdF+DtIvP6WordaD07jzoMYui8YieNojFKk6Ppo0GxfFsdb3UTFF5AcjBFV
-jMop+VQnr1ha2XO+/YenHBPQSAyuQOFhwVaK6uvcr8cZE9+G4riH7fUpKQemAbwD
-ykH1NsiEtZpO6vy8VpTpvBXYWNLHzzdcy/AE9GNmxg57ID0Fr4UBmLgiQwv7XKyX
-0EMxbbQWD8K3WwPlTpxsLKaaGMINsaIUMwx7Dl/TcSZkrtolaNVLWue6Z4m/bbPl
-ONdvjwJ2qVku9eMJF9ylyU6jKJ3Rr1PUAktamQIDAQABAoIBAQCV68jWYGpF1OT4
-ZrYxxMES5VK1zngZxw8VRjBF63SagkZT/RVHkQYJRv5hzFk9WIHz5728Asm/jMv7
-uMtPaX9C+iRp01UZWFIKc2w7qqgxtjXwjlvvVlVG1KJd8SWll6RDRUo9Dxyr/3TI
-7WytjB840IwGUcEmMwtczffNz2XaJUUFA/Wg9+s/Ahl1PzumtAzRqBh6rVrbAPom
-vmCIMHbbZ2DXD9evWVjRq1RI6AnueIWgdipaY3CSVVrgTrWBEVejdQq508Cmejpo
-0pqMBDn94c5NDsd5K+1h/0AevzVxjC7T8y39sD7TpDcEsAJvR72V9j1qOOYqeNy0
-h3YufXJNAoGBAOsNWEFSpUUoYIm1hZ/MSJDIPt1ET7YxHCaRzPsxPiuno0ot+JVY
-dHxoKWlZfvxGg9zncwMD46ZTvw/AaoqkhytwM7lnInoCMHSwkarfRjeXlOxzF8oo
-2z7GgMThYJ2OgExzsWaT5DSQmJfR+E8MIfkuI9aJep3OnTKWi4kXygv7AoGBANkr
-Ue5c67kjWhnvzNvvaYgCKqAa1JAzZ10laQ4WHB/SaitTZP4dRbowAQZUYyiffx1t
-5+FikkP+erm2MtY3h5ihTZqNNOTgMe0cctnFlFNxvmgWNFxLQqknJpe+d9e1p0gI
-Atkpzc5INTUIStXeeA7cIGsKE17qy9NZc/lRgnt7AoGADJ0puE+0GNMC40D/i8TN
-vB9S6FLrKC7YgOVgJ7bLzFHxvGBdL76QecCpQEMSQn2SQ/+Tt3y08c8auMCttwT/
-UAB0diWnvv5xFUIIfy/+N6uFzW6bvziUE3lZnbculSX5kqC+y29yVrPPzI3zEmLn
-S9UDDVdRYjidTQKxOEkziZMCgYEAgn1gLpzQ2x7d3eXUL3cs7xd2K1vTy43HlxWK
-iXdJkOlq9/uVHIfUROrhQr9kEZ280J8gjLIg9xArB/ntlAArzs9lhO9CECCSf0nv
-zODGnlkjMwHclnR2apNmwhklg4zYJhUCOSDAVCnZJrOD2/xgIXWtWQPl3cuxi54d
-bHrIr48CgYBYyQGFC0/f3OqIqbtarSbMPTBK/EdDPqRyF14mw6JqOgPLM7wVSSde
-yC5jAov6WKkE5jC+kJ1OK4E+khNAirKdEX7he5Z3gZ3Mg0eKWWXK5ZUg2AxHwc63
-ce4/U7Nq26JtrKdDgfkI8hA7c0ZI6v3Rx/K78apSG5cO2WpUFXKG1Q==
------END RSA PRIVATE KEY-----''', keyPath: '', username: 'ec2-user'], transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '/var/lib/jenkins/workspace', sourceFiles: '/var/lib/jenkins/workspace/qwq')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                   sshPublisher(publishers: [sshPublisherDesc(configName: 'EC2-1', sshCredentials: [encryptedPassphrase: '{AQAAABAAAAAQ6t+HHnQYlx49/yfgOxmj2zpy7CP0u/Bu0o/SGQ5jRjg=}', key: '', keyPath: '', username: 'ec2-user'], transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: 'build/static/media', sourceFiles: 'build/static/media/logo.103b5fa1.svg')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
         }
     }
