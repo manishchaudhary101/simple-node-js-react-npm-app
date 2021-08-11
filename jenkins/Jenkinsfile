@@ -13,11 +13,11 @@ pipeline {
         stage("Build") {
              
             steps {
-                 input "Start the Build environment to ${params.choice}?"
+                 input "Start the Build environment to ${params.ENVIRONMENT}?"
 
                 sh "npm install"
                 sh "npm run build"
-                 echo "Building to ${params.choice}"
+                 echo "Building to ${params.ENVIRONMENT}"
             }
         }
         stage("Deploy") {
