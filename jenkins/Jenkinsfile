@@ -2,9 +2,16 @@ pipeline {
      agent any
      
      tools {nodejs "Node16"}
-     
+     parameters {
+  choice choices: ['AUS', 'EU', 'USA'], name: 'Environment'
+}
+
      stages {
         stage("Build") {
+             input {
+  message 'Choose the Environment'
+}
+
             steps {
                 sh "npm install"
                 sh "npm run build"
