@@ -25,8 +25,7 @@ pipeline {
             }
         }
         stage("Deploy") {
-            steps {
-                echo "deploying"
+
                 sshPublisher(publishers: [sshPublisherDesc(configName: 'EC2-1', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '/jenkins/workspace', sourceFiles: '/jenkins/workspace/qwq')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false),
                                           sshPublisherDesc(configName: 'EC2-2', transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '.', remoteDirectorySDF: false, removePrefix: '/jenkins/workspace', sourceFiles: '/jenkins/workspace/qwq')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
             }
