@@ -11,11 +11,17 @@ pipeline {
   
      stages {
         stage("Build") {
+             when {
+                expression { 
+                   return params.ENVIRONMENT == 'AUS'
+                }
+            }
 
             steps {
 
                 sh "npm install"
                 sh "npm run build"
+                echo "Building to AUS"
             }
         }
         stage("Deploy") {
