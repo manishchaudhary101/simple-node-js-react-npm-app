@@ -36,11 +36,11 @@ pipeline {
              steps{ input "Ready to deploy for ${params.ENVIRONMENT} Server ?"
                  echo "deploying to ${params.ENVIRONMENT}" 
 
-                    sshPublisher(publishers: [sshPublisherDesc(configName: 'SERVER_NAME', 
+                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
                     transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
                     makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
                     sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                    }
+                    */ }
             
      
         }
