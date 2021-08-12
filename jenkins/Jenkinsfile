@@ -10,14 +10,24 @@ pipeline {
      tools {nodejs "Node16"}
   
      stages {
+
+         stage('Email') {
+    steps {
+        script {
+            def emailSubject = "${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}"
+            emailext body: 'Testingggg', recipientProviders: [buildUser()], replyTo: 'No-Reply@test.com', subject: 'This is Test', to: 'imchaudhary@gmail.com'
+        }
+    }
+}
+
         stage("Build") {
              
             steps {
                  input "Start the Build for ${params.ENVIRONMENT} Server ?"
-
+                echo "Building to ${params.ENVIRONMENT}"
                 sh "npm install"
                 sh "npm run build"
-                 echo "Building to ${params.ENVIRONMENT}"
+                 
             }
         }
         stage("Deploy") {
