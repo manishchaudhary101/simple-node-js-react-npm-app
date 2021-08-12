@@ -15,7 +15,7 @@ pipeline {
     steps {
         script {
             def emailSubject = "${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}"
-            emailext body: 'Testingggg', recipientProviders: [buildUser()], replyTo: 'No-Reply@test.com', subject: 'This is Test', to: 'imchaudhary@gmail.com'
+            emailext body: 'Testingggg', recipientProviders: [buildUser()], replyTo: 'No-Reply@test.com', subject: 'This is Test', to: 'imchaudhary101@gmail.com'
         }
     }
 }
