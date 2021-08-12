@@ -41,6 +41,7 @@ pipeline {
         stage("Deploy") {
              steps{ 
                     echo "deploying to {$params.ENVIRONMENT}"
+                    
                  }
                  
                  
@@ -59,7 +60,7 @@ pipeline {
   post {
     success {
       sh "echo 'Send mail on success'"
-      mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed. ${env.BUILD_URL}"
+      mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed. *${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
     }
     failure {
           step([$class: 'Mailer',
