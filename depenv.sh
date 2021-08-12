@@ -9,4 +9,3 @@ elif ($ENVIRONMENT = USA)
 then
         echo "Deploying to $ENVIRONMENT"
 fi
-~                     
