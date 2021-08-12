@@ -14,11 +14,10 @@ pipeline {
     stage('Email') {
         steps{
             script {
-                def emailSubject = "${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}"
                 emailext mimeType: 'text/html',
                     subject: "[Jenkins]${currentBuild.fullDisplayName}",
                     to: "imchaudhary101@gmail.com",
-                    body: '''<a href="${BUILD_URL}input">click to approve</a>'''
+                    body: "Before build"
     }
 }
     }
@@ -42,13 +41,12 @@ pipeline {
 
   post {
     success {
-
-      emailext (
-          to: 'imchaudhary101@gmail.com',
-          subject: "SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]'",
-          body: """<p>SUCCESSFUL: Job '${env.JOB_NAME} [${env.BUILD_NUMBER}]':</p>
-            <p>Check console output at &QUOT;<a href='${env.BUILD_URL}'>${env.JOB_NAME} [${env.BUILD_NUMBER}]</a>&QUOT;</p>""",
-          recipientProviders: [[$class: 'DevelopersRecipientProvider']]
-        )
-    } }
+      sh "echo 'Send mail on success'"
+      mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed."
+    }
+    failure {
+      sh "echo 'Send mail on failure'"
+      mail to:"imchaudhary101@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Boo, we failed."
+    }
+  }
 }
