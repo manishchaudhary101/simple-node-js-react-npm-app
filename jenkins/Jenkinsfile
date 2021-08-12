@@ -10,7 +10,7 @@ pipeline {
      tools {nodejs "Node16"}
   
      stages {
-        stage("Build to ${params.ENVIRONMENT}") {
+        stage("Build") {
              
             steps {
                  input "Start the Build for ${params.ENVIRONMENT} Server ?"
