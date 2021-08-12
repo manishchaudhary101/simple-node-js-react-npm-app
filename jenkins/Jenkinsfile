@@ -55,8 +55,10 @@ pipeline {
       mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed."
     }
     failure {
-      sh "echo 'Send mail on failure'"
-      mail to:"imchaudhary101@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Boo, we failed."
+          step([$class: 'Mailer',
+            notifyEveryUnstableBuild: true,
+            recipients: "imchaudhary101@gmail.com",
+            sendToIndividuals: true])
     }
   }
 }
