@@ -12,7 +12,6 @@ pipeline {
      stages {
 
     stage('Email') {
-         steps {
             script {
                 def emailSubject = "${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}"
                 emailext mimeType: 'text/html',
@@ -35,8 +34,19 @@ pipeline {
         stage("Deploy") {
              steps{ echo "deploying to ${params.ENVIRONMENT}" }
             
+     
         }
     }
 }
 
 }
+   post {
+    success {
+      sh "echo 'Send mail on success'"
+      mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed."
+    }
+    failure {
+      sh "echo 'Send mail on failure'"
+      mail to:"imchaudhary101@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Boo, we failed."
+    }
+  }
