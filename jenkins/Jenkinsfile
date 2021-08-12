@@ -50,11 +50,11 @@ pipeline {
   post {
     success {
       sh "echo 'Send mail on success'"
-      mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.currentResult}", body: "Yay, we passed."
+      mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed."
     }
     failure {
       sh "echo 'Send mail on failure'"
-      mail to:"imchaudhary101@gmail.com", subject:"FAILURE: ${currentBuild.currentResult}", body: "Boo, we failed."
+      mail to:"imchaudhary101@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Boo, we failed."
     }
   }
 }
