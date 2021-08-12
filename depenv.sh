@@ -1,5 +1,5 @@
 #!/bin/bash
-if ($ENVIRONMENT = AUS)
+if ($params.ENVIRONMENT = AUS)
 then
         echo "deploying to $ENVIRONMENT"
 elif ($ENVIRONMENT = EU)
