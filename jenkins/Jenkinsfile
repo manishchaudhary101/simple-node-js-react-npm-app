@@ -17,7 +17,7 @@ pipeline {
                  
                 echo "Building to ${params.ENVIRONMENT}"
                 sh "npm install"
-                sh "npm run bild"
+                sh "npm run build"
                  
             }
         }
