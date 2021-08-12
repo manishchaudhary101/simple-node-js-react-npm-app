@@ -11,14 +11,14 @@ pipeline {
   
      stages {
 
-         stage('Email') {
-    steps {
-        script {
-            def emailSubject = "${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}"
-            emailext mimeType: 'text/html',
-                 subject: "[Jenkins]${currentBuild.fullDisplayName}",
-                 to: "imchaudhary101@gmail.com",
-                 body: '''<a href="${BUILD_URL}input">click to approve</a>'''
+    stage('Email') {
+         steps {
+            script {
+                def emailSubject = "${env.JOB_NAME} - Build# ${env.BUILD_NUMBER} - ${env.BUILD_STATUS}"
+                emailext mimeType: 'text/html',
+                    subject: "[Jenkins]${currentBuild.fullDisplayName}",
+                    to: "imchaudhary101@gmail.com",
+                    body: '''<a href="${BUILD_URL}input">click to approve</a>'''
     }
 }
 
