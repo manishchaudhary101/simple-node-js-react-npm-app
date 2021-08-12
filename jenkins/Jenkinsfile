@@ -11,15 +11,6 @@ pipeline {
   
      stages {
 
-    stage('Email') {
-        steps{
-            script {
-                emailext mimeType: 'text/html',
-                    subject: "[Jenkins]${currentBuild.fullDisplayName}",
-                    to: "imchaudhary101@gmail.com",
-                    body: "Before build"
-    }
-}
     }
         
         stage("Build") {
