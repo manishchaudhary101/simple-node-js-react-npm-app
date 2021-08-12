@@ -10,21 +10,10 @@ pipeline {
      tools {nodejs "Node16"}
   
      stages {
-
-    stage('Email') {
-        steps{
-            script {
-                emailext mimeType: 'text/html',
-                    subject: "[Jenkins]${currentBuild.fullDisplayName}",
-                    to: "imchaudhary101@gmail.com",
-                    body: "Before build"
-    }
-}
-    }
-        
-        stage("Build") {
+    
+    stage("Build") {
              
-            steps {
+        steps {
                  
                 echo "Building to ${params.ENVIRONMENT}"
                 sh "npm install"
@@ -32,6 +21,19 @@ pipeline {
                  
             }
         }
+        stage("Test") {
+             
+        steps {
+                 
+                echo "Testing to ${params.ENVIRONMENT}"
+                sh "npm test"
+                
+                 
+            }
+        }
+
+
+
         stage("Deploy") {
              steps{ input "Ready to deploy for ${params.ENVIRONMENT} Server ?"
                  echo "deploying to ${params.ENVIRONMENT}" 
