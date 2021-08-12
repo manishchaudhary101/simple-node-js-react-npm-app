@@ -47,5 +47,4 @@ pipeline {
       sh "echo 'Send mail on failure'"
       mail to:"imchaudhary101@gmail.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Boo, we failed."
     }
-  }
 }
