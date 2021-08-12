@@ -40,7 +40,12 @@ pipeline {
 
         stage("Deploy") {
              steps{ 
-                 echo "deploying to ${params.ENVIRONMENT}" 
+                 script { echo "deploying to ${params.ENVIRONMENT}" 
+                 sh('chmod +x depenv.sh && ./depenv.sh')
+
+                 }
+                 
+                 
 
                    /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
                     transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
