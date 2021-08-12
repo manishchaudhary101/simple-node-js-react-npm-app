@@ -39,7 +39,6 @@ pipeline {
     }
 }
 
-}
    post {
     success {
       sh "echo 'Send mail on success'"
