@@ -40,9 +40,7 @@ pipeline {
 
         stage("Deploy") {
              steps{ 
-                 script { echo "deploying to ${params.ENVIRONMENT}" 
-                 sh('chmod +x depenv.sh && ./depenv.sh')
-
+                 
                  }
                  
                  
