@@ -32,10 +32,14 @@ pipeline {
             }
         }
 
+        stage("Approval"){
+           steps{ input "Ready to deploy for ${params.ENVIRONMENT} Server ?"
 
+           } 
+        }
 
         stage("Deploy") {
-             steps{ input "Ready to deploy for ${params.ENVIRONMENT} Server ?"
+             steps{ 
                  echo "deploying to ${params.ENVIRONMENT}" 
 
                    /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
