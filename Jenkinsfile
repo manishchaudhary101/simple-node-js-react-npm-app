@@ -1,11 +1,6 @@
 pipeline {
     agent any
-    options {
-        
-        
-        timeout(time: 30, unit: 'MINUTES')
-        timestamps()
-    }
+
     stages {
         stage('Commit stage') {
             steps {
