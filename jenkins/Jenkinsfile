@@ -39,6 +39,11 @@ pipeline {
         }
 
         stage("Deploy") {
+                when {
+                 expression {
+                    environment name: "ENVIRONMENT", value: "AUS"
+                }
+            }
              steps{ 
                     echo "deploying to {$params.ENVIRONMENT}"
                     
