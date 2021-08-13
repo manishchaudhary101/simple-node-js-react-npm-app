@@ -2,7 +2,7 @@ pipeline {
      agent any
          parameters {
         choice(
-            choices: [ '', 'AUS' , 'EU', 'USA'],
+            choices: ['AUS' , 'EU', 'USA'],
             description: '',
             name: 'ENVIRONMENT')
          }
