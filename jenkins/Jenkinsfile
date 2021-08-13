@@ -32,8 +32,9 @@ pipeline {
         }
 
         stage("Approval"){
-           steps{ input "Ready to deploy for ${params.ENVIRONMENT} Server ?"
-                mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input"
+           steps{mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input" 
+               input "Ready to deploy for ${params.ENVIRONMENT} Server ?"
+                
 
            } 
         }
