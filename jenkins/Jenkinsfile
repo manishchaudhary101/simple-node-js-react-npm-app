@@ -5,14 +5,15 @@ pipeline {
      tools {nodejs "Node16"}
   
      stages {
-         parameters {
+         
+    stage("Build") {
+        parameters {
         choice(
             choices: ['AUS' , 'EU', 'USA'],
             description: '',
             name: 'ENVIRONMENT')
          }
     
-    stage("Build") {
              
         steps {
                  
