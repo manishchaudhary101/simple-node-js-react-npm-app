@@ -42,12 +42,17 @@ pipeline {
 
              steps{ 
                     echo "deploying to {$params.ENVIRONMENT}"
+                    sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', sshLabel: [label: 'AUS'], transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
                     
                  }
                  
                  
 
-                   sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', sshLabel: [label: 'AUS'], transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '', remoteDirectorySDF: false, removePrefix: '', sourceFiles: '')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)]) }
+                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
+                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
+                    makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
+                    sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    */ }
             
      
         }
