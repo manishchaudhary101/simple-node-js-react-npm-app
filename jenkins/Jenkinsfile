@@ -39,11 +39,7 @@ pipeline {
         }
 
         stage("Deploy") {
-                when {
-                 expression {
-                    parameters name: "ENVIRONMENT", value: "EU"
-                }
-            }
+
              steps{ 
                     echo "deploying to {$params.ENVIRONMENT}"
                     
