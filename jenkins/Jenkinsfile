@@ -13,8 +13,7 @@ pipeline {
     
     stage("Build") {
              
-        steps { timeout (time:5 , unit: "MINUTES"){
-                mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input"}
+        steps {
                 echo "Building to ${params.ENVIRONMENT}"
                 sh "npm install"
                 sh "npm run build"
@@ -34,6 +33,7 @@ pipeline {
 
         stage("Approval"){
            steps{ input "Ready to deploy for ${params.ENVIRONMENT} Server ?"
+                mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input"
 
            } 
         }
