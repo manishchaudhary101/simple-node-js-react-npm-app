@@ -41,7 +41,7 @@ pipeline {
         stage("Deploy") {
                 when {
                  expression {
-                    environment name: "TRIGGER_NEXT", value: "true"
+                    parameters name: "ENVIRONMENT", value: "EU"
                 }
             }
              steps{ 
