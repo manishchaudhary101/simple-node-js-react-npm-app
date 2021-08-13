@@ -1,15 +1,16 @@
 pipeline {
      agent any
+         
+   
+     tools {nodejs "Node16"}
+  
+     stages {
          parameters {
         choice(
             choices: ['AUS' , 'EU', 'USA'],
             description: '',
             name: 'ENVIRONMENT')
          }
-   
-     tools {nodejs "Node16"}
-  
-     stages {
     
     stage("Build") {
              
