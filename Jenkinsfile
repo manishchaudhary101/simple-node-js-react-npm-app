@@ -6,12 +6,12 @@ pipeline {
             steps {
                 task('Compile and package') {
                     echo 'Building...'
-                    sleep 2
+                    
                     echo 'Successfully built project!'
                 }
 
                 task('Upload artifacts') {
-                    sleep 3
+                    
                     echo 'Successfully uploaded artifacts!'
                 }
             }
@@ -20,12 +20,12 @@ pipeline {
             steps {
                 task('Run component tests') {
                     echo 'Running tests...'
-                    sleep 4
+                    
                     echo 'Component tests finished!'
                 }
 
                 task('Run integration tests') {
-                    sleep 5
+                    
                     echo 'Integration tests finished'
                 }
             }
@@ -34,13 +34,13 @@ pipeline {
             steps {
                 task('Deploy to UAT') {
                     echo 'Deploying to UAT...'
-                    sleep 4
+                    
                     echo 'Successfully deployed to UAT'
                 }
 
                 task('Deploy to production') {
                     echo 'Deploying to production...'
-                    sleep 4
+                    
                     echo 'Deployed to production!'
                 }
             }
