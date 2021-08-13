@@ -1,9 +1,11 @@
 pipeline {
     agent any
+    tools {nodejs "Node16"}
 
     stages {
         stage('Commit stage') {
             steps {
+                sh "npm install"
                 task('Compile and package') {
                     echo 'Building...'
                     
@@ -18,6 +20,7 @@ pipeline {
         }
         stage('Test stage') {
             steps {
+                sh "npm test"
                 task('Run component tests') {
                     echo 'Running tests...'
                     
