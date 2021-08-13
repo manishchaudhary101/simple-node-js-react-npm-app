@@ -14,7 +14,6 @@ pipeline {
     stage("Build") {
              
         steps {
-                wait: true
                 mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input" 
                 echo "Building to ${params.ENVIRONMENT}"
                 sh "npm install"
