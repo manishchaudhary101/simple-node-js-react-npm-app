@@ -11,6 +11,38 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
+    "test-coverage": "npm run test -- --coverage  --watchAll=false",
     "eject": "react-scripts eject"
+  },
+  "jest": {
+    "collectCoverageFrom": [
+      "**/*.{js,jsx}",
+      "!coverage/**",
+      "!node_modules/**",
+      "!src/index.js",
+      "!src/App.js",
+      "!public/**",
+      "!build/**"
+    ],
+    "coverageReporters": [
+      "text",
+      "lcov",
+      "json",
+      "text",
+      "clover",
+      "cobertura"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
   }
 }
