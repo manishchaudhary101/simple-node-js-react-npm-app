@@ -21,6 +21,8 @@ pipeline {
 
             steps {
                 withSonarQubeEnv('sonar') {
+                    sh "npm run test"
+                    sh "npm run coverage-lcov"
     
                     sh "${scannerHome}/bin/sonar-scanner"
                 }
