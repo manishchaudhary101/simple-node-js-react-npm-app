@@ -24,7 +24,7 @@ pipeline {
                     sh "CI=true npm test"
                     sh "npm run test-coverage"
                     sh "${scannerHome}/bin/sonar-scanner"
-                    slackUploadFile channel: '#pipeline', credentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', filePath: '/coverage/cobertura-coverage.xml', initialComment: 'Here is the Coverage report '
+                    slackUploadFile channel: '#pipeline', credentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', filePath: '*/coverage/cobertura-coverage.xml', initialComment: 'Here is the Coverage report '
                     
                 }
             }
