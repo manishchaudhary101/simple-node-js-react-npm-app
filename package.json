@@ -10,10 +10,7 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "mocha",
-    "test:awesome": "mocha --reporter mochawesome || true ",
-    "eject": "react-scripts eject",
-    "coverage": "./node_modules/.bin/nyc -r cobertura -r text-summary -r html npm test",
-    "coverage-lcov": "./node_modules/.bin/nyc -r cobertura -r text-summary -r lcov npm test"
+    "test": "react-scripts test --env=jsdom",
+    "eject": "react-scripts eject"
   }
 }
