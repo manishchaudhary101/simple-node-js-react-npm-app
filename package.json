@@ -3,6 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "jest-jenkins-reporter": "^1.0.2",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "^4.0.3"
@@ -10,7 +11,20 @@
   "scripts": {
     "start": "react-scripts start",
     "build": "react-scripts build",
-    "test": "react-scripts test --env=jsdom",
-    "eject": "react-scripts eject"
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "test-coverage": "npm run test -- --coverage --coverageDirectory=output/coverage/jest --watchAll=false"
+  },
+  "jest": {
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
+    "coverageReporters": [
+      "text",
+      "cobertura"
+    ]
+  },
+  "devDependencies": {
+    "jest": "^27.0.6"
   }
 }
