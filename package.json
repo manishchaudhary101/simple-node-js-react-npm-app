@@ -3,6 +3,9 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@testing-library/jest-dom": "^5.12.0",
+    "@testing-library/react": "^11.2.7",
+    "@testing-library/user-event": "^12.8.3",
     "react": "^16.0.0",
     "react-dom": "^16.0.0",
     "react-scripts": "^4.0.3"
@@ -11,7 +14,7 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
-    "test-coverage": "npm run test -- --coverage  --watchAll=false",
+    "test-coverage": "npm run test -- --coverage --coverageDirectory=output/coverage/jest --watchAll=false",
     "eject": "react-scripts eject"
   },
   "jest": {
@@ -26,11 +29,8 @@
     ],
     "coverageReporters": [
       "text",
-      "lcov",
-      "json",
-      "text",
-      "clover",
-      "cobertura"
+      "cobertura",
+	  "json-summary"
     ]
   },
   "browserslist": {
@@ -39,10 +39,11 @@
       "not dead",
       "not op_mini all"
     ],
+
     "development": [
       "last 1 chrome version",
       "last 1 firefox version",
       "last 1 safari version"
     ]
   }
-}
+  }
