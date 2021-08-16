@@ -18,15 +18,9 @@
     "eject": "react-scripts eject"
   },
   "jest": {
-    "collectCoverageFrom": [
-      "**/*.{js,jsx}",
-      "!coverage/**",
-      "!node_modules/**",
-      "!src/index.js",
-      "!src/App.js",
-      "!public/**",
-      "!build/**"
-    ],
+    "transform": {
+      "^.+\\.(js|jsx)$": "babel-jest"
+    },
     "coverageReporters": [
       "text",
       "cobertura",
