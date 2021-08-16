@@ -21,8 +21,9 @@ pipeline {
                  
                     sh "npm run test-coverage"
                     cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/output/coverage/jest/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
-                    
-                    slackUploadFile channel: '#pipeline', credentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', filePath: '/var/lib/jenkins/workspace/test2/output/coverage/jest/cobertura-coverage.xml', initialComment: 'Here is the Coverage report '
+                   //s3 bucket config
+                   slackSend channel: '#pipeline', color: '#439FE0', message: "Coverage report has been uploaded to S3 bucket. If you want to see the log click here ${env.BUILD_URL}console", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+                   
 
          
             }
@@ -31,7 +32,8 @@ pipeline {
 
         stage("Deploy to QA") {
 
-             steps{ mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
+             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click here to approve the deployment to QA ${env.BUILD_URL}input or If you want to see the log click here ${env.BUILD_URL}console", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
                input "Ready to deploy for QA Server ?"
                     echo "deploying to QA"
                     
@@ -47,7 +49,8 @@ pipeline {
 
              stage("Deploy to Staging") {
 
-             steps{ mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
+             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click here to approve the deployment to Staging ${env.BUILD_URL}input or If you want to see the log click here ${env.BUILD_URL}console", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
                input "Ready to deploy for Staging Server ?"
                     echo "deploying to Staging"
                     
@@ -63,7 +66,8 @@ pipeline {
 
              stage("Deploy to Prod") {
 
-             steps{ mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
+             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click here to approve the deployment to Prod ${env.BUILD_URL}input or If you want to see the log click here ${env.BUILD_URL}console", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
                input "Ready to deploy for prod Server ?"
                     echo "deploying to Prod"
                     
