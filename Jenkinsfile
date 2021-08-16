@@ -22,7 +22,7 @@ pipeline {
                     sh "npm run test-coverage"
                     cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/output/coverage/jest/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
                     
-                    slackUploadFile channel: '#pipeline', credentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', filePath: "cobertura-coverage.xml", initialComment: 'Here is the Coverage report '
+                    slackUploadFile channel: '#pipeline', credentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', filePath: '/output/coverage/jest/cobertura-coverage.xml', initialComment: 'Here is the Coverage report '
 
          
             }
