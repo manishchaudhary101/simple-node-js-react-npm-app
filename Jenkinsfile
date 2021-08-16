@@ -32,7 +32,7 @@ pipeline {
 
         stage("Deploy to QA") {
 
-             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click here to Approve or Abort the deployment to QA <${env.BUILD_URL}input|Open> or click here <${env.BUILD_URL}console|to see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click<${env.BUILD_URL}input|here>to Approve or Abort the deployment to QA or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
                mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
                input "Ready to deploy for QA Server ?"
                     echo "deploying to QA"
@@ -49,7 +49,7 @@ pipeline {
 
              stage("Deploy to Staging") {
 
-             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Approve or Abort the deployment to Staging <${env.BUILD_URL}input|Open> or click here <${env.BUILD_URL}console|to see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click<${env.BUILD_URL}input|here> to Approve or Abort the deployment to Staging or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
                mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
                input "Ready to deploy for Staging Server ?"
                     echo "deploying to Staging"
@@ -66,7 +66,7 @@ pipeline {
 
              stage("Deploy to Prod") {
 
-             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click here to Approve or Abort the deployment to Prod <${env.BUILD_URL}input|Open> or click here <${env.BUILD_URL}console|to see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+             steps{ slackSend channel: '#pipeline', color: '#439FE0', message: "Click<${env.BUILD_URL}input|here>to Approve or Abort the deployment to Prod or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
                mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
                input "Ready to deploy for prod Server ?"
                     echo "deploying to Prod"
