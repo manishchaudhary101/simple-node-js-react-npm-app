@@ -15,7 +15,7 @@ pipeline {
                  
             }
     }
-    stage("Test") {  
+      stage("Test") {  
 
             steps {
                  
@@ -29,7 +29,7 @@ pipeline {
                     
                 }
             }
-        
+            }
 
       }
 
@@ -83,7 +83,7 @@ pipeline {
             
      
         }
-     }
+     
     
 
 
