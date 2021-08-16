@@ -91,7 +91,8 @@ pipeline {
     success {
       sh "echo 'Send mail on success'"
       mail to:"imchaudhary101@gmail.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed. *${currentBuild.currentResult}:* Job ${env.JOB_NAME} build ${env.BUILD_NUMBER}\n More info at: ${env.BUILD_URL}"
-      
+      sh "echo sending notification to slack channel"
+      slackSend channel: '#pipeline', color: '#439FE0', message: "SUCCESSFUL!! The process has been completed now. click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
     }
     failure {
           step([$class: 'Mailer',
