@@ -19,7 +19,7 @@ pipeline {
 
             steps {
                  
-                    sh "CI=true npm test -- --coverage"
+                    sh "CI=true npm test"
 
                    post{
                 always{
