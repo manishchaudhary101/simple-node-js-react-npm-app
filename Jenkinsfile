@@ -1,8 +1,5 @@
 pipeline {
      agent any
-     
-      mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
-      input "Ready to deploy for QA Server ?"
      parameters {
         choice(
             choices: ['QA' , 'Staging','Prod'],
@@ -13,7 +10,12 @@ pipeline {
      tools {nodejs "Node16"}
   
      stages {
-    
+    stage({
+      
+          mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
+      input "please choose the ENVIRONMENT ?"
+      
+    })
     stage("Build") {
              
         steps {
