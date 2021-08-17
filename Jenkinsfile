@@ -10,12 +10,13 @@ pipeline {
      tools {nodejs "Node16"}
   
      stages {
-      stage("ENV-Approval"){
-      
-          mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
-          input "please choose the ENVIRONMENT ?"
-      
-      }
+       stage("ENV-Approval") {
+
+             steps{ 
+               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
+               input "Please choose an ENVIRONMENT to proceed furthure ?"
+                    
+                 }
     stage("Build") {
              
         steps {
