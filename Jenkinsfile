@@ -1,103 +1,92 @@
 pipeline {
      agent any
-     parameters {
-        choice(
-            choices: ['QA' , 'Staging','Prod'],
-            description: '',
-            name: 'ENVIRONENT')
-    }
   
      tools {nodejs "Node16"}
   
-     stages {
-       stage("Approval") {
-
-             steps{ 
-
-               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}build or for more info please click here ${env.BUILD_URL}console" 
-               input "Please choose an ENVIRONMENT to proceed furthure ?"
-                    
-                 }
-       }
-    stage("Build") {
-             
-        steps {
-                slackSend channel: '#pipeline', color: '#439FE0', message: "The build process has started. Job Name:-${env.JOB_NAME} Build No.:-${env.BUILD_NUMBER} For logs click <${env.BUILD_URL}|here>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
-                echo "Building"
+            stage("Build") {
+            steps {
+      
+                slackSend channel: '#pipeline', color: '#439FE0', message: "For ${env.tags} tag, The build process has started. Job Name:-${env.JOB_NAME} Build No.:-${env.BUILD_NUMBER}, For logs click <${env.BUILD_URL}|here>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+         
+               echo "Building"
                 sh "npm install"
                 sh "npm run build"
-                 
+                echo "Creating the Zip File"
             }
-    }
-      stage("Test") {  
-
-            steps {
-                 
-                    sh "npm run test-coverage"
-                    cobertura autoUpdateHealth: false, autoUpdateStability: false, coberturaReportFile: '**/output/coverage/jest/cobertura-coverage.xml', conditionalCoverageTargets: '70, 0, 0', failUnhealthy: false, failUnstable: false, lineCoverageTargets: '80, 0, 0', maxNumberOfBuilds: 0, methodCoverageTargets: '80, 0, 0', onlyStable: false, sourceEncoding: 'ASCII', zoomCoverageChart: false
-                   //s3 bucket config
-                   slackSend channel: '#pipeline', color: '#439FE0', message: "Coverage report has been uploaded to S3 bucket. If you want to see the log click here (<${env.BUILD_URL}console|open>)", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
-                   
-
-         
-            }
-
-      }
-
-        stage("Deploy to QA") {
-
-             steps{ slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to QA or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
-               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
-               input "Ready to deploy for QA Server ?"
-                    echo "deploying to QA"
-                    
-                 }
-                 
-                 
-
-                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
-                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
-                    makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
-                    sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                    */ }
-
-             stage("Deploy to Staging") {
-
-             steps{ slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to Staging or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
-               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
-               input "Ready to deploy for Staging Server ?"
-                    echo "deploying to Staging"
-                    
-                 }
-                 
-                 
-
-                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
-                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
-                    makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
-                    sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                    */ }
-
-             stage("Deploy to Prod") {
-
-             steps{ slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to Prod or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
-               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "See ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
-               input "Ready to deploy for prod Server ?"
-                    echo "deploying to Prod"
-                    
-                 }
-                 
-                 
-
-                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
-                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
-                    makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
-                    sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
-                    */ }
+        }                
             
-     
-        }
-     
+        stage("Deploy to AUS") {
+
+          
+
+             steps{ 
+                  when { tag "*-aus"}
+
+               slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to AUS or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "to Approve or Abort the deployment to AUS, click on the link ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console"
+               input "Ready to deploy for AUS Server ?"
+                    echo "deploying to AUS"
+                    
+                 }
+                 
+                 
+
+                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
+                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
+                    makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
+                    sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    */ }
+
+             stage("Deploy to EU") {
+             when { tag "*-eu"}
+
+             steps{
+              
+                slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to EU or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+               mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "to Approve or Abort the deployment to EU, click on the link ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console" 
+               input "Ready to deploy for EU Server ?"
+                    echo "deploying to EU"
+             }
+                 
+                 
+                 
+
+                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
+                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
+                    makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
+                    sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    */ }
+
+             stage("Deploy to USA") {
+              
+             when { 
+                tag  '*us'
+              }  
+                    
+              steps{ 
+             
+
+               slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to USA or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
+               mail to: 'imchaudhary101@gmail.com', subject: "Please approve ${env.BUILD_NUMBER}", body: "to Approve or Abort the deployment to USA, click on the link ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console"
+               input "Ready to deploy for USA Server ?"
+                    echo "deploying to USA"
+                    
+                 }
+                 
+                 
+
+                   /* sshPublisher(publishers: [sshPublisherDesc(configName: 'bastion', 
+                    transfers: [sshTransfer(cleanRemote: false, excludes: '', execCommand: '', execTimeout: 120000, flatten: false, 
+                    makeEmptyDirs: false, noDefaultExcludes: false, patternSeparator: '[, ]+', remoteDirectory: '/var/www/html', remoteDirectorySDF: false, removePrefix: '/build', 
+                    sourceFiles: 'build/*')], usePromotionTimestamp: false, useWorkspaceInPromotion: false, verbose: false)])
+                    */ }
+
+
+    
+
+     }
+        
+        
     
 
 
