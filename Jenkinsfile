@@ -69,7 +69,10 @@ pipeline {
                slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to USA or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
                mail to: 'imchaudhary101@gmail.com', subject: "Please approve ${env.BUILD_NUMBER}", body: "to Approve or Abort the deployment to USA, click on the link ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console"
                input "Ready to deploy for USA Server ?"
-                    echo "deploying to USA"
+               echo "deploying to USA"
+               sshagent(['manishnewnew']) {
+                    sh ''' scp -o StrictHostKeyChecking=no -r build/* ubuntu@13.127.226.80:/var/www/jenkins-react-app '''
+}
                     
                  }
                  
