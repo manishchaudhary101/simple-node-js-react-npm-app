@@ -60,8 +60,7 @@ pipeline {
              stage("Deploy to USA") {
               
              when { 
-                tag  '*us'
-              }  
+                tag  "*-us"}  
                     
               steps{ 
              
