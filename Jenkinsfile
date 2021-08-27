@@ -16,11 +16,12 @@ pipeline {
         }                
             
         stage("Deploy to AUS") {
+             when { tag "*-aus" }
 
           
 
              steps{ 
-                  when { tag "*-aus"}
+                  
 
                slackSend channel: '#pipeline', color: '#99FF99', message: "Click <${env.BUILD_URL}input|here> to Approve or Abort the deployment to AUS or click here to <${env.BUILD_URL}console|see logs>", teamDomain: 'jenkins-scy4932', tokenCredentialId: '23b64830-463e-4bcd-9d4d-4af0fa266eb7', username: 'Jenkinsss'
                mail to: 'imchaudhary101@gmail.com', subject: "Please approve #${env.BUILD_NUMBER}", body: "to Approve or Abort the deployment to AUS, click on the link ${env.BUILD_URL}input or for more info please click here ${env.BUILD_URL}console"
