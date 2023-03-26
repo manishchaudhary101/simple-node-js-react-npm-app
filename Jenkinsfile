@@ -71,7 +71,7 @@ pipeline {
                input "Ready to deploy for USA Server ?"
                echo "deploying to USA"
                sshagent(['manishnewnew']) {
-                    sh ''' scp -o StrictHostKeyChecking=no -r build/* ubuntu@13.127.226.80:/var/www/jenkins-react-app '''
+                    sh ''' scp -o StrictHostKeyChecking=no -r build/* ubuntu@yourip:/var/www/jenkins-react-app '''
 }
                     
                  }
